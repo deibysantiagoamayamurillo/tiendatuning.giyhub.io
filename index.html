@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Tienda Tuning</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR DE INFORMACIÓN -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-location-dot"></i> Bienvenidos a Tienda Tuning | Diagonal 7 # 38-36 - Local 7B</span>
+        <span><i class="fa-solid fa-clock"></i> Atención: Lun - Sáb 8:00 AM - 6:00 PM</span>
+    </div>
+
+    <!-- ENCABEZADO Y NAVEGACIÓN PRINCIPAL -->
+    <header class="navbar">
+        <div class="brand-section">
+            <img src="img/logo.PNG" alt="Logo Tienda Tuning" class="logo-img" onerror="this.src='https://via.placeholder.com/50/111/ff2e2e?text=TT'">
+            <div class="brand-titles">
+                <h1>TIENDA <span>TUNING</span></h1>
+                <p class="slogan">No somos los únicos, pero sí los mejores</p>
+            </div>
+        </div>
+
+        <nav class="nav-links-wrapper">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">INICIO</a></li>
+                <li><a href="productos.php">PRODUCTOS</a></li>
+                <li><a href="pedidos.html">PEDIDOS</a></li>
+            </ul>
+
+            <!-- ACCIONES DE USUARIO Y CARRITO -->
+            <div class="user-actions">
+                <a href="api/login.php" class="btn btn-outline"><i class="fa-solid fa-user"></i> INICIAR SESIÓN</a>
+                <a href="api/registro.php" class="btn btn-primary">REGISTRARSE</a>
+                
+                
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- BANNER PRINCIPAL (HERO) -->
+    <section class="hero-banner" style="background: url('img/banner.jpg') center/cover no-repeat;">
+        <div class="hero-content">
+            <h2>PASIÓN POR LA PERSONALIZACIÓN VEHICULAR</h2>
+            <p>Transformamos tu carro o moto en una pieza única de estilo, confort y alto rendimiento.</p>
+            <a href="productos.php" class="btn btn-primary btn-large">
+                <i class="fa-solid fa-store"></i> EXPLORAR CATÁLOGO DE PRODUCTOS
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTENIDO INFORMATIVO PRINCIPAL -->
+    <main class="container" style="padding: 40px 20px;">
+        
+        <!-- SECCIÓN 1: ¿QUÉ ES EL TUNING? -->
+        <section style="margin-bottom: 50px;">
+            <h2 class="page-title">¿QUÉ ES EL TUNING?</h2>
+            <p style="font-size: 1.1rem; line-height: 1.7; color: #ccc; max-width: 900px; margin: 0 auto; text-align: center;">
+                El <strong>Tuning</strong> es la personalización de un vehículo a través de diferentes modificaciones mecánicas, estéticas y tecnológicas. Nació de la pasión automotriz para adaptar cada detalle del automóvil a los gustos y necesidades únicas de su conductor, logrando que destaque tanto en la calle como en la pista.
+            </p>
+        </section>
+
+        <!-- SECCIÓN 2: ¿PARA QUÉ SIRVE PERSONALIZAR TU VEHÍCULO? -->
+        <section style="margin-bottom: 50px;">
+            <h2 class="page-title">¿PARA QUÉ SIRVE Y CULES SON SUS BENEFICIOS?</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px;">
+                
+                <div style="background: #1e1e1e; padding: 25px; border-radius: 8px; border-left: 4px solid #ff2e2e; text-align: center;">
+                    <i class="fa-solid fa-lightbulb" style="font-size: 2.5rem; color: #ff2e2e; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Mayor Seguridad e Iluminación</h3>
+                    <p style="color: #aaa; font-size: 0.95rem; line-height: 1.5;">
+                        Sustituir las luces halógenas tradicionales por sistemas de exploración LED de alta potencia mejora significativamente la visibilidad nocturna y la seguridad en carretera.
+                    </p>
+                </div>
+
+                <div style="background: #1e1e1e; padding: 25px; border-radius: 8px; border-left: 4px solid #ff2e2e; text-align: center;">
+                    <i class="fa-solid fa-gauge-high" style="font-size: 2.5rem; color: #ff2e2e; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Rendimiento y Aerodinámica</h3>
+                    <p style="color: #aaa; font-size: 0.95rem; line-height: 1.5;">
+                        Componentes como alerones, kits de mofle alto flujo y sistemas de admisión optimizan la estabilidad del vehículo y la eficiencia en la evacuación de gases.
+                    </p>
+                </div>
+
+                <div style="background: #1e1e1e; padding: 25px; border-radius: 8px; border-left: 4px solid #ff2e2e; text-align: center;">
+                    <i class="fa-solid fa-compact-disc" style="font-size: 2.5rem; color: #ff2e2e; margin-bottom: 15px;"></i>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Confort y Entretenimiento</h3>
+                    <p style="color: #aaa; font-size: 0.95rem; line-height: 1.5;">
+                        La instalación de pantallas táctiles inteligentes, audio de alta fidelidad y películas nanocerámicas garantizan viajes cómodos y protegidos contra los rayos UV.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: BANNER DE INVITACIÓN AL CATÁLOGO -->
+        <section style="background: linear-gradient(135deg, #181818, #2a0808); padding: 40px; border-radius: 10px; text-align: center; border: 1px solid #ff2e2e;">
+            <h2 style="color: #fff; font-size: 2rem; margin-bottom: 10px;">¿LISTO PARA TUNNEAR TU VEHICULO?</h2>
+            <p style="color: #ddd; font-size: 1.1rem; margin-bottom: 25px;">
+                Visita nuestro catálogo con las mejores marcas y componentes para tu vehículo.
+            </p>
+            <a href="productos.php" class="btn btn-primary btn-large">
+                <i class="fa-solid fa-cart-shopping"></i> IR A LA TIENDA DE PRODUCTOS
+            </a>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>&copy; 2026 Tienda Tuning. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/app.js"></script>
+</body>
+</html>

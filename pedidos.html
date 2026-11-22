@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Tienda Tuning</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <span><i class="fa-solid fa-location-dot"></i> Bienvenidos a Tienda Tuning | Diagonal 7 # 38-36 - Local 7B</span>
+        <span><i class="fa-solid fa-clock"></i> Atención: Lun - Sáb 8:00 AM - 6:00 PM</span>
+    </div>
+
+    <header class="navbar">
+        <div class="brand-section">
+            <img src="img/logo.PNG" alt="Logo Tienda Tuning" class="logo-img" onerror="this.src='https://via.placeholder.com/50/111/ff2e2e?text=TT'">
+            <div class="brand-titles">
+                <h1>TIENDA <span>TUNING</span></h1>
+                <p class="slogan">No somos los únicos, pero sí los mejores</p>
+            </div>
+        </div>
+
+        <nav class="nav-links-wrapper">
+            <ul class="nav-links">
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="productos.html">PRODUCTOS</a></li>
+                <li><a href="pedidos.html" class="active">PEDIDOS</a></li>
+            </ul>
+
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline"><i class="fa-solid fa-user"></i> INICIAR SESIÓN</a>
+                <a href="registro.html" class="btn btn-primary">REGISTRARSE</a>
+                <a href="carrito.html" class="btn btn-cart">
+                    <i class="fa-solid fa-cart-shopping"></i> CARRITO (<span id="cart-count">0</span>)
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="page-title">HISTORIAL DE MIS PEDIDOS</h2>
+
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th># Pedido</th>
+                    <th>Fecha</th>
+                    <th>Productos</th>
+                    <th>Dirección de Envío</th>
+                    <th>Método de Pago</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody id="pedidos-body">
+                <tr>
+                    <td colspan="7" style="text-align:center; padding: 30px; color: #a0a0a0;">Verificando sesión...</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 25px; text-align: right;">
+            <a href="productos.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i> REALIZAR NUEVO PEDIDO</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tienda Tuning. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // BLOQUEO DE SEGURIDAD: Verificar sesión activa antes de cargar mis pedidos
+            const usuarioActivo = JSON.parse(localStorage.getItem('tiendaTuningUsuario'));
+
+            if (!usuarioActivo || !usuarioActivo.email) {
+                alert('Debes iniciar sesión para consultar tu historial de pedidos.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            cargarMisPedidos(usuarioActivo.email);
+        });
+
+        function cargarMisPedidos(emailUsuario) {
+            const tbody = document.getElementById('pedidos-body');
+            const todosLosPedidos = JSON.parse(localStorage.getItem('tiendaTuningPedidos')) || [];
+            
+            // Filtrar los pedidos que pertenezcan únicamente al cliente en sesión
+            const misPedidos = todosLosPedidos.filter(p => p.usuario === emailUsuario);
+
+            if (misPedidos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 30px; color: #a0a0a0;">Aún no has realizado ningún pedido. ¡Explora nuestros productos y realiza tu primera compra!</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            misPedidos.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${p.id}</strong></td>
+                    <td>${p.fecha || 'Reciente'}</td>
+                    <td>${p.productos}</td>
+                    <td>${p.direccion}</td>
+                    <td>${p.metodoPago || 'Efectivo/Transferencia'}</td>
+                    <td style="color: var(--primary-red); font-weight: bold;">${p.total}</td>
+                    <td><span class="badge badge-success" style="padding: 4px 10px; border-radius: 4px; background: #28a745; color: #fff; font-size: 0.8rem;">${p.estado}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>

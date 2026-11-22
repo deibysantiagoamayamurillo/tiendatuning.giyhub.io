@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Tienda Tuning</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #fff;
+        }
+
+        .top-bar {
+            background-color: #000;
+            color: #ccc;
+            font-size: 12px;
+            padding: 8px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+        .top-bar .location {
+            color: #dc2626;
+            font-weight: bold;
+        }
+        .top-bar .hours {
+            color: #dc2626;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0d0d0d;
+            padding: 15px 30px;
+            border-bottom: 1px solid #222;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .logo-text h1 {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .logo-text span {
+            color: #888;
+            font-size: 11px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+        .nav-links a.btn-active {
+            background-color: #dc2626;
+        }
+        .nav-links a.btn-outline {
+            border: 1px solid #fff;
+        }
+        .nav-links a.btn-red {
+            background-color: #dc2626;
+        }
+        .nav-links a.btn-cart {
+            border: 1px solid #fff;
+        }
+        .nav-links a.btn-delete {
+            background-color: #7f1d1d;
+        }
+        .nav-links a:hover {
+            opacity: 0.85;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .titulo-catalogo {
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .titulo-catalogo span {
+            color: #dc2626;
+        }
+
+        .container-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 1024px) {
+            .container-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .container-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background-color: #121212;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .card-img-container {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background-color: #1a1a1a;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .card-img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .card h3 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .card p {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 15px;
+            min-height: 32px;
+            line-height: 1.3;
+        }
+        .price {
+            font-size: 20px;
+            font-weight: 900;
+            color: #dc2626;
+            margin-bottom: 15px;
+        }
+        .btn-comprar {
+            background-color: #dc2626;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-comprar:hover {
+            background-color: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>
+            <span class="location">📍 Bienvenidos a Tienda Tuning</span> | Diagonal 7 # 38
+        </div>
+        <div>
+            <span class="hours">⏰ Atención:</span> Lun - Sáb 8:00 AM - 6:00 PM
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">TT</div>
+            <div class="logo-text">
+                <h1>TIENDA TUNING</h1>
+                <span>No somos los únicos, pero sí los mejores</span>
+            </div>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">INICIO</a>
+            <a href="productos.php" class="btn-active">PRODUCTOS</a>
+            <a href="api/ver_pedidos.php">PEDIDOS</a>
+            <a href="api/login.php" class="btn-outline" id="enlace-login">🔍 INICIAR SESIÓN</a>
+            <a href="api/registro.php" class="btn-red" id="enlace-registro">REGISTRARSE</a>
+            <a href="api/carrito.php" class="btn-cart">🛒 CARRITO (<span id="contador-carrito">0</span>)</a>
+            <a href="api/eliminar_cuenta.php" onclick="return confirm('¿Estás seguro de eliminar tu cuenta?');" class="btn-delete">ELIMINAR CUENTA</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <h2 class="titulo-catalogo">CATÁLOGO DE <span>PRODUCTOS</span></h2>
+        
+        <div class="container-grid">
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/aleron.jpeg" alt="Alerón Deportivo">
+                </div>
+                <h3>Alerón Deportivo</h3>
+                <p>Alerón aerodinámico en fibra de carbono.</p>
+                <div class="price">$250.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(1, 'Alerón Deportivo', 250000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/audio.PNG" alt="Sistema de Audio">
+                </div>
+                <h3>Sistema de Audio</h3>
+                <p>Equipo de sonido de alta fidelidad con planta y subwoofer.</p>
+                <div class="price">$2.000.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(2, 'Sistema de Audio', 2000000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/escape.jpeg" alt="Punta de Escape">
+                </div>
+                <h3>Punta de Escape</h3>
+                <p>Punta de escape deportiva en acero inoxidable.</p>
+                <div class="price">$1.200.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(3, 'Punta de Escape', 1200000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/luces.jpeg" alt="Luces LED RGB">
+                </div>
+                <h3>Luces LED RGB</h3>
+                <p>Kit de iluminación LED interior/exterior RGB.</p>
+                <div class="price">$200.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(4, 'Luces LED RGB', 200000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/pantalla.webp" alt="Pantalla Multimedia">
+                </div>
+                <h3>Pantalla Multimedia</h3>
+                <p>Radio Android táctil con GPS y cámara de reversa.</p>
+                <div class="price">$850.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(5, 'Pantalla Multimedia', 850000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/polarizado.jpeg" alt="Película Nanocerámica">
+                </div>
+                <h3>Polarizado Nanocerámico</h3>
+                <p>Protección UV y reducción de calor para vidrios.</p>
+                <div class="price">$350.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(6, 'Polarizado Nanocerámico', 350000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/rines.jpeg" alt="Rines Deportivos">
+                </div>
+                <h3>Rines Deportivos</h3>
+                <p>Juego de 4 rines de aleación ligera de alta resistencia.</p>
+                <div class="price">$1.800.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(7, 'Rines Deportivos', 1800000)">Comprar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="img/timon.jpeg" alt="Timón Deportivo">
+                </div>
+                <h3>Timón Deportivo</h3>
+                <p>Volante ergonómico de alto agarre tipo carreras.</p>
+                <div class="price">$450.000</div>
+                <button class="btn-comprar" onclick="agregarAlCarrito(8, 'Timón Deportivo', 450000)">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('api/verificar_sesion.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.logueado) {
+                        const btnLogin = document.getElementById('enlace-login');
+                        const btnRegistro = document.getElementById('enlace-registro');
+                        
+                        if (btnLogin) {
+                            let htmlUser = `<span style="color: #fff; margin-right: 5px; font-size: 12px;">Hola, <b>${data.nombre}</b></span>`;
+                            if (data.rol === 'admin') {
+                                htmlUser += `<a href="api/admin_usuarios.php" style="background-color: #d97706; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; margin-left: 4px; font-size: 11px;">USUARIOS</a>`;
+                                htmlUser += `<a href="api/admin_productos.php" style="background-color: #dc2626; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; margin-left: 4px; font-size: 11px;">PRODUCTOS</a>`;
+                            }
+                            htmlUser += `<a href="api/logout.php" style="background-color: #7f1d1d; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; margin-left: 4px; font-size: 11px;">CERRAR SESIÓN</a>`;
+                            
+                            let wrapper = document.createElement('div');
+                            wrapper.style.display = 'inline-flex';
+                            wrapper.style.alignItems = 'center';
+                            wrapper.innerHTML = htmlUser;
+                            
+                            btnLogin.replaceWith(wrapper);
+                        }
+                        
+                        if (btnRegistro) {
+                            btnRegistro.style.display = 'none';
+                        }
+                    }
+                })
+                .catch(error => console.error('Error al verificar la sesión:', error));
+        });
+    </script>
+</body>
+</html>

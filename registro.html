@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - Tienda Tuning</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background-color: #0a0a0a; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .registro-container { background: #141414; padding: 30px; border-radius: 8px; border: 1px solid #333; width: 100%; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        h2 { text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        h2 span { color: #e50914; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 13px; color: #ccc; }
+        .form-group input { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px; }
+        .btn-red { background-color: #e50914; color: #fff; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; }
+        .btn-red:hover { background-color: #b20710; }
+        .volver { text-align: center; margin-top: 15px; }
+        .volver a { color: #888; text-decoration: none; font-size: 13px; }
+        .volver a:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="registro-container">
+        <h2>Crear <span>Cuenta</span></h2>
+
+        <form action="api/registro.php" method="POST">
+            <div class="form-group">
+                <label>Nombre completo:</label>
+                <input type="text" name="nombre" placeholder="Ej: Camilo Urbano" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" title="El nombre solo debe contener letras y espacios" required>
+            </div>
+
+            <div class="form-group">
+                <label>Número de teléfono:</label>
+                <input type="tel" name="telefono" placeholder="Ej: 3185207091" pattern="[0-9]+" title="El teléfono solo debe contener números" required>
+            </div>
+
+            <div class="form-group">
+                <label>Edad:</label>
+                <input type="number" name="edad" placeholder="18" min="1" max="120">
+            </div>
+
+            <div class="form-group">
+                <label>Correo electrónico:</label>
+                <input type="email" name="correo" placeholder="correo@domain.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input type="password" name="password" placeholder="********" required>
+            </div>
+
+            <button type="submit" class="btn-red">Registrarse</button>
+        </form>
+
+        <div class="volver">
+            <a href="productos.php">← Volver al Catálogo</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Tienda Tuning</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #111;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 800px;
+        }
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #dc2626;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background-color: #262626;
+            color: #fff;
+        }
+        .total-section {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #16a34a;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        select, button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        select {
+            background-color: #262626;
+            border: 1px solid #444;
+            color: #fff;
+        }
+        button {
+            background-color: #dc2626;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background-color: #b91c1c;
+        }
+        .btn-volver {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-volver:hover {
+            text-decoration: underline;
+        }
+        .empty-msg {
+            text-align: center;
+            color: #888;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tu Carrito - Tienda Tuning</h2>
+
+        <div id="contenido-carrito">
+            <!-- Aquí se cargarán dinámicamente los productos del carrito -->
+        </div>
+
+        <div id="seccion-pago" style="display: none;">
+            <div class="total-section" id="total-pagar">
+                Total a Pagar: $0
+            </div>
+
+            <div class="form-group">
+                <label for="metodo_pago">Método de Pago:</label>
+                <select id="metodo_pago">
+                    <option value="Efectivo contra entrega">Efectivo contra entrega</option>
+                    <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+                    <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="procesarPedido()">Confirmar y Pagar Pedido</button>
+        </div>
+
+        <a href="productos.php" class="btn-volver">Volver al Catálogo</a>
+    </div>
+
+    <script>
+        // Cargar el carrito desde localStorage
+        let carrito = JSON.parse(localStorage.getItem('carrito_tuning')) || [];
+
+        function mostrarCarrito() {
+            let contenedor = document.getElementById('contenido-carrito');
+            let seccionPago = document.getElementById('seccion-pago');
+            let totalPagarDiv = document.getElementById('total-pagar');
+
+            if (carrito.length === 0) {
+                contenedor.innerHTML = '<p class="empty-msg">Tu carrito está vacío.</p>';
+                seccionPago.style.display = 'none';
+                return;
+            }
+
+            seccionPago.style.display = 'block';
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            let totalGeneral = 0;
+
+            carrito.forEach((item, index) => {
+                let subtotal = item.precio * item.cantidad;
+                totalGeneral += subtotal;
+                html += `
+                    <tr>
+                        <td>${item.nombre}</td>
+                        <td>$${Number(item.precio).toLocaleString()}</td>
+                        <td>${item.cantidad}</td>
+                        <td>$${Number(subtotal).toLocaleString()}</td>
+                        <td><button style="padding: 5px 10px; font-size: 12px; width: auto;" onclick="eliminarItem(${index})">X</button></td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            contenedor.innerHTML = html;
+            totalPagarDiv.innerHTML = `Total a Pagar: $${Number(totalGeneral).toLocaleString()}`;
+        }
+
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito_tuning', JSON.stringify(carrito));
+            mostrarCarrito();
+        }
+
+        function procesarPedido() {
+            if (carrito.length === 0) {
+                alert('El carrito está vacío.');
+                return;
+            }
+
+            let totalGeneral = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+            let metodoPago = document.getElementById("metodo_pago").value;
+
+            let datos = new URLSearchParams();
+            datos.append("carrito", JSON.stringify(carrito));
+            datos.append("total", totalGeneral);
+            datos.append("metodo_pago", metodoPago);
+
+            // Ruta absoluta correcta hacia la carpeta api
+            fetch("api/guardar_pedido.php", {
+                method: "POST",
+                body: datos
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.status === 'success') {
+                    // Vaciar carrito local
+                    localStorage.removeItem('carrito_tuning');
+                    // Redirigir al historial de pedidos
+                    window.location.href = "ver_pedidos.php";
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Ocurrió un error al procesar la compra. Asegúrate de haber iniciado sesión.");
+            });
+        }
+
+        // Ejecutar al cargar la página
+        mostrarCarrito();
+    </script>
+
+</body>
+</html>
